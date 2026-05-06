@@ -1,0 +1,40 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  build-linux-gcc:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Configure
+      run: cmake -S . -B _build -DCMAKE_INSTALL_PREFIX=_install
+    - name: Build
+      run: cmake --build _build
+    - name: Install
+      run: cmake --build _build --target install
+
+  build-linux-clang:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Configure
+      run: cmake -S . -B _build -DCMAKE_INSTALL_PREFIX=_install
+      env:
+        CC: clang
+        CXX: clang++
+    - name: Build
+      run: cmake --build _build
+    - name: Install
+      run: cmake --build _build --target install
+
+  build-windows:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Configure
+      run: cmake -S . -B _build -DCMAKE_INSTALL_PREFIX=_install
+    - name: Build
+      run: cmake --build _build --config Release
+    - name: Install
+      run: cmake --build _build --target install --config Release

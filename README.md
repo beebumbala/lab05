@@ -1,1 +1,1 @@
-[![Build Status](https://app.travis-ci.com/beebumbala/lab04.svg?token=6y3JRtBdLCybUzbF6FPM)](https://app.travis-ci.com/beebumbala/lab04)
+# Badge [![CI](https://github.com/beebumbala/lab04/actions/workflows/ci.yml/badge.svg)](https://github.com/beebumbala/lab04/actions/workflows/ci.yml)
