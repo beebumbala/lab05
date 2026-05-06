@@ -8,6 +8,11 @@ option(BUILD_TESTS "Build tests" OFF)
 
 project(print)
 
+if(MSVC)
+    add_compile_options(/MD)
+    add_link_options(/MD)
+endif()
+
 add_library(print STATIC ${CMAKE_CURRENT_SOURCE_DIR}/sources/print.cpp)
 
 target_include_directories(print PUBLIC
