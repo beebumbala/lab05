@@ -49,4 +49,4 @@ jobs:
     - name: Install
       run: cmake --build _build --target install --config Release
     - name: Test
-      run: cmake --build _build --target test --verbose --config Release
+      run: cmake --build _build --config Release --verbose --target RUN_TESTS
