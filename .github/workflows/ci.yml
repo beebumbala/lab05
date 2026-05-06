@@ -7,19 +7,25 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+      with:
+        submodules: true   # Важно: загружает подмодули (GTest)
     - name: Configure
-      run: cmake -S . -B _build -DCMAKE_INSTALL_PREFIX=_install
+      run: cmake -S . -B _build -DCMAKE_INSTALL_PREFIX=_install -DBUILD_TESTS=ON
     - name: Build
       run: cmake --build _build
     - name: Install
       run: cmake --build _build --target install
+    - name: Test
+      run: cmake --build _build --target test --verbose
 
   build-linux-clang:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+      with:
+        submodules: true
     - name: Configure
-      run: cmake -S . -B _build -DCMAKE_INSTALL_PREFIX=_install
+      run: cmake -S . -B _build -DCMAKE_INSTALL_PREFIX=_install -DBUILD_TESTS=ON
       env:
         CC: clang
         CXX: clang++
@@ -27,14 +33,20 @@ jobs:
       run: cmake --build _build
     - name: Install
       run: cmake --build _build --target install
+    - name: Test
+      run: cmake --build _build --target test --verbose
 
   build-windows:
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v4
+      with:
+        submodules: true
     - name: Configure
-      run: cmake -S . -B _build -DCMAKE_INSTALL_PREFIX=_install
+      run: cmake -S . -B _build -DCMAKE_INSTALL_PREFIX=_install -DBUILD_TESTS=ON
     - name: Build
       run: cmake --build _build --config Release
     - name: Install
       run: cmake --build _build --target install --config Release
+    - name: Test
+      run: cmake --build _build --target test --verbose --config Release
